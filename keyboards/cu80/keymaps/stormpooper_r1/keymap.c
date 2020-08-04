@@ -20,6 +20,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _DEFAULT 0
 #define _FNCTION 1
 
+enum { TD_PREV, TD_NEXT };
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_PREV] = ACTION_TAP_DANCE_DOUBLE(KC_MPRV, KC_MRWD),
+    [TD_NEXT] = ACTION_TAP_DANCE_DOUBLE(KC_MNXT, KC_MFFD),
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT_all(KC_ESC, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_PSCR, KC_SLCK, KC_PAUS,
 
@@ -37,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLD, KC_MPLY, KC_VOLU,
                             // TEMP: Increase Auto Shift speed
-                            KC_ASUP, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_MSTP, KC_MNXT,
+                            KC_ASUP, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, TD(TD_PREV), KC_MSTP, TD(TD_NEXT),
 
                             KC_ASTG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                             // TEMP: Decrease Auto Shift speed
