@@ -32,7 +32,8 @@ AUDIO_ENABLE = no           # Audio output on port C6
 FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
 HD44780_ENABLE = no         # Enable support for HD44780 based LCDs
 
-TAP_DANCE_ENABLE = no       # Enable tap dance functions
-KEY_LOCK_ENABLE = yes       # Enable key lock
+KEY_LOCK_ENABLE = yes       # Enable key lock (repeat keys)
+TAP_DANCE_ENABLE = no       # Enable tap dance (multiple taps per key)
+AUTO_SHIFT_ENABLE = yes	    # Enable Auto-Shift (hold for Capitals)
 
 LAYOUTS = tkl_iso tkl_ansi
