@@ -13,10 +13,11 @@ void tapdance_dynamicmacro(qk_tap_dance_state_t *state, void *user_data) {
     process_dynamic_macro(action, &kr);
 }
 
-enum { TD_DYNMACRO };
+enum { TD_DYNMACRO, TD_POWER };
 
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_DYNMACRO] = ACTION_TAP_DANCE_FN(tapdance_dynamicmacro),
+    [TD_POWER]    = ACTION_TAP_DANCE_DOUBLE(KC_SYSTEM_WAKE, KC_PWR),
 };
 
 #define _DEFAULT 0
@@ -35,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                             KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, KC_RALT, LT(_FNCTION, KC_RGUI), KC_APP, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
 
-    [_FNCTION] = LAYOUT_all(_______, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_F21, KC_F22, KC_F23, KC_F24, KC_MUTE, TD(TD_DYNMACRO), _______,
+    [_FNCTION] = LAYOUT_all(_______, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_F21, KC_F22, KC_F23, KC_F24, KC_MUTE, TD(TD_DYNMACRO), TD(TD_POWER),
 
                             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLD, KC_MPLY, KC_VOLU,
                             // TEMP: Increase Auto Shift speed
