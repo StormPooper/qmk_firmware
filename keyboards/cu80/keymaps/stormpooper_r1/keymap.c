@@ -1,31 +1,29 @@
-/*
-Copyright 2020 Andy Holland
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #include QMK_KEYBOARD_H
+
+void tapdance_dynamicmacro(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count > 3) return;
+    keyrecord_t kr;
+    kr.event.pressed = false;
+    uint16_t action  = DYN_REC_STOP;
+    if (state->count == 1) {
+        action = DYN_MACRO_PLAY1;
+    } else if (state->count == 2) {
+        action           = DYN_REC_STOP;
+        kr.event.pressed = true;
+    } else if (state->count == 3) {
+        action = DYN_REC_START1;
+    }
+    process_dynamic_macro(action, &kr);
+}
+
+enum { TD_DYNMACRO };
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_DYNMACRO] = ACTION_TAP_DANCE_FN(tapdance_dynamicmacro),
+};
 
 #define _DEFAULT 0
 #define _FNCTION 1
-
-enum { TD_PREV, TD_NEXT };
-
-qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_PREV] = ACTION_TAP_DANCE_DOUBLE(KC_MPRV, KC_MRWD),
-    [TD_NEXT] = ACTION_TAP_DANCE_DOUBLE(KC_MNXT, KC_MFFD),
-};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT_all(KC_ESC, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_PSCR, KC_SLCK, KC_PAUS,
@@ -40,11 +38,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                             KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, KC_RALT, LT(_FNCTION, KC_RGUI), KC_APP, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
 
-    [_FNCTION] = LAYOUT_all(_______, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_F21, KC_F22, KC_F23, KC_F24, KC_MUTE, _______, _______,
+    [_FNCTION] = LAYOUT_all(_______, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_F21, KC_F22, KC_F23, KC_F24, KC_MUTE, TD(TD_DYNMACRO), _______,
 
                             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLD, KC_MPLY, KC_VOLU,
                             // TEMP: Increase Auto Shift speed
-                            KC_ASUP, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, TD(TD_PREV), KC_MSTP, TD(TD_NEXT),
+                            KC_ASUP, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_MSTP, KC_MNXT,
 
                             KC_ASTG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                             // TEMP: Decrease Auto Shift speed
