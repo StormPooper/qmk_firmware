@@ -17,7 +17,7 @@ enum { TD_DYNMACRO, TD_POWER };
 
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_DYNMACRO] = ACTION_TAP_DANCE_FN(tapdance_dynamicmacro),
-    [TD_POWER]    = ACTION_TAP_DANCE_DOUBLE(KC_SYSTEM_WAKE, KC_PWR),
+    [TD_POWER]    = ACTION_TAP_DANCE_DOUBLE(KC_SYSTEM_SLEEP, KC_PWR),
 };
 
 #define _DEFAULT 0
@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                             KC_LSFT, KC_NUBS, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, KC_UP,
 
-                            KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, KC_RALT, LT(_FNCTION, KC_RGUI), KC_APP, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
+                            KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, KC_RALT, MO(_FNCTION), KC_APP, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
 
     [_FNCTION] = LAYOUT_all(_______, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_F21, KC_F22, KC_F23, KC_F24, KC_MUTE, TD(TD_DYNMACRO), TD(TD_POWER),
 
