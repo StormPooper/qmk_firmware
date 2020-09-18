@@ -1,4 +1,4 @@
-# Custom keymap for CU80 R1 ISO
+# Custom keymap for Preonic
 
 Press button on PCB (hard mode) or hold Esc when plugging in to boot into DFU mode.
 
@@ -21,8 +21,4 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-The firmware can then be flashed with:
-
-```bash
-qmk flash -kb cu80 -km stormpooper_r1
-```
+It should be picked up by `qmk flash` after that.
