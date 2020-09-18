@@ -1,6 +1,6 @@
 # Custom keymap for Preonic
 
-Press button on PCB (hard mode) or hold Esc when plugging in to boot into DFU mode.
+Hold Esc when plugging in to boot into DFU mode.
 
 For building on Linux, add these udev rules:
 
@@ -21,4 +21,9 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-It should be picked up by `qmk flash` after that.
+
+The firmware can then be flashed with:
+
+```bash
+qmk flash -kb preonic/rev3 -km stormpooper
+```
